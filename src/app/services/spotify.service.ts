@@ -13,24 +13,26 @@ export class SpotifyService {
     console.log('Spotify Service Listos')
   }
 
-  getNewReleases() {
+  getQuery( query: string ) {
+    const url = `https://api.spotify.com/v1/${query}`;
 
     const headers = new HttpHeaders ({
-      'Authorization': 'Bearer BQBToHyzng0ur-gv7a8wf14HThEvZbVI7MpANTwbRj4vQOz-ElFVeBlEZL_KUq1uZ0e170CngBLk9uY_v1_ok6r4ijCxrISAJg9d41ZPHLOBkCsndX7D9jlO_EI7fxe0kFgux-izjRU-h1l8JSxvhfnLcSlztKvP1pWkNA'
+      'Authorization': 'Bearer BQCWj8tFsZukP25WCRH42snEuFnyaPsqR4SpERP-fv4wUbT9VMRgKUaZpl5V3pSUah8CoXottGGu9ITp5w4'
     })
 
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases?limit=20', { headers })
-                    .pipe( map( data => data['albums'].items));
-    
+    return this.http.get( url, { headers } )
+
+  }
+
+  getNewReleases() {
+
+    return this.getQuery('browse/new-releases?limit=20')
+              .pipe( map( data => data['albums'].items));
   }
   
   getArtist( term: string ){
-    
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer BQBToHyzng0ur-gv7a8wf14HThEvZbVI7MpANTwbRj4vQOz-ElFVeBlEZL_KUq1uZ0e170CngBLk9uY_v1_ok6r4ijCxrISAJg9d41ZPHLOBkCsndX7D9jlO_EI7fxe0kFgux-izjRU-h1l8JSxvhfnLcSlztKvP1pWkNA'
-    })
-    return this.http.get(`https://api.spotify.com/v1/search?query=${term}&type=artist&market=PE&offset=0&limit=15`, { headers })
-                    .pipe(  map( data => data['artists'].items));
+    return this.getQuery(`search?query=${term}&type=artist&market=PE&offset=0&limit=15`)
+    .pipe(  map( data => data['artists'].items));
   }
 
 }

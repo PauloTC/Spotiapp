@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
+import { NoimagePipe } from './pipes/noimage.pipe';
+import { CardsComponent } from './components/cards/cards.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
 
 //Importar Rutas
 
@@ -22,7 +25,10 @@ import { ROUTES } from './app.routes';
     HomeComponent,
     SearchComponent,
     ArtistComponent,
-    NavbarComponent
+    NavbarComponent,
+    NoimagePipe,
+    CardsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
